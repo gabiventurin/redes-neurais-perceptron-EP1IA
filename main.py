@@ -3,8 +3,8 @@ import numpy as np
 
 def main():
 
-    caminho_entrada = "/home/amandaventurin/Downloads/redes-neurais-perceptron-EP1IA/conjuntos de dados/caracteres-Fausett/caracteres-limpo.csv"
-    caminho_saida = "/home/amandaventurin/Downloads/redes-neurais-perceptron-EP1IA/conjuntos de dados/caracteres-Fausett/saidasFausett.csv"
+    caminho_entrada = "./conjuntos de dados/caracteres-Fausett/caracteres-limpo.csv"
+    caminho_saida = "./conjuntos de dados/caracteres-Fausett/saidasFausett.csv"
 
     indice_perceptron = 0
 
