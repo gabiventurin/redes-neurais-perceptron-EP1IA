@@ -31,7 +31,7 @@ class HandlerPerceptron:
         self.b = self.b + self.eta * d
 
     # ----------------------------------
-    # Debug (opcional, mas útil)
+    # Debug
     # ----------------------------------
     def debug(self, x, y, d):
         print("\n--- DEBUG ---")
