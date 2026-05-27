@@ -1,46 +1,68 @@
 from HandlerPerceptron import HandlerPerceptron
-from LeituraArquivo import carregar_fausett
-
 import numpy as np
 
 
 def main():
 
-    # arquivo CSV com os dados de ctreino
-    caminho_dataset = "./conjuntos de dados/caracteres-Fausett/caracteres-limpo.csv"
+    caminho_entrada = "./conjuntos de dados/caracteres-Fausett/caracteres-limpo.csv"
+    caminho_saida = "./conjuntos de dados/caracteres-Fausett/saidasFausett.csv"
 
-    # Carrega automaticamente X e Y
-    # X -> entradas
-    # Y -> saídas esperadas
-    X, Y = carregar_fausett(caminho_dataset)
+    # ------------------------------
+    # Leitura dos dados
+    # ------------------------------
+    matriz_entradas = np.loadtxt(
+        caminho_entrada,
+        delimiter=",",
+        encoding="utf-8-sig"
+    )
 
+    matriz_saidas = np.loadtxt(
+        caminho_saida,
+        encoding="utf-8-sig"
+    )
+
+    # ---------------------------------------------------
     # Lista para armazenar os perceptrons treinados
+    # ---------------------------------------------------
     lista_perceptrons = []
 
+    # ===================================================
     # PRIMEIRO LAÇO
     # Itera sobre os perceptrons/classes
-    for indice_perceptron in range(Y.shape[1]):
+    # ===================================================
+    for indice_perceptron in range(matriz_saidas.shape[1]):
 
         print("\n==================================================")
         print(f"INICIANDO TREINAMENTO DO PERCEPTRON {indice_perceptron}")
         print("==================================================")
 
-        # Seleciona a coluna de saída referente ao perceptron atual
-        vetor_saidas = Y[:, indice_perceptron]
+        # ---------------------------------------------------
+        # Seleciona coluna correta da saída
+        # Cada perceptron aprende apenas sua classe
+        # ---------------------------------------------------
+        if matriz_saidas.ndim > 1:
+            vetor_saidas = matriz_saidas[:, indice_perceptron]
+        else:
+            vetor_saidas = matriz_saidas
 
-        # Número de entradas/features
-        num_features = X.shape[1]
+        # ---------------------------------------------------
+        # Inicialização do perceptron
+        # ---------------------------------------------------
+        num_features = matriz_entradas.shape[1]
 
-        # Inicializa o perceptron
         perceptron = HandlerPerceptron(num_features)
 
+        # ---------------------------------------------------
         # Controle das épocas
+        # ---------------------------------------------------
         mudanca_neuronio = False
 
         epoca = 0
 
+        # ===================================================
         # SEGUNDO LAÇO
         # Itera sobre as épocas
+        # ===================================================
         while not mudanca_neuronio:
 
             epoca += 1
@@ -51,20 +73,23 @@ def main():
 
             mudanca_neuronio = True
 
+            # ===================================================
             # TERCEIRO LAÇO
-            # Itera sobre todas as amostras
+            # Itera sobre as amostras
+            # ===================================================
             for i in range(vetor_saidas.shape[0]):
 
-                # Entrada atual
-                x = X[i]
-                # Saída esperada
+                x = matriz_entradas[i]
                 d = vetor_saidas[i]
 
+                # ---------------------------------------------------
                 # Forward
+                # ---------------------------------------------------
                 y = perceptron.calcular_saida(x)
 
                 # ---------------------------------------------------
-                # DEBUG
+                # DEBUG COMPLETO
+                # ---------------------------------------------------
                 print("\n================ DEBUG ================")
 
                 print(f"Perceptron atual: {indice_perceptron}")
@@ -89,8 +114,9 @@ def main():
                 print("\nTaxa de aprendizado:")
                 print(perceptron.eta)
 
-
+                # ---------------------------------------------------
                 # Atualização dos pesos
+                # ---------------------------------------------------
                 if y != d:
 
                     print("\n>>> ERRO ENCONTRADO")
@@ -112,6 +138,7 @@ def main():
 
                     print("\nResultado: Classificação CORRETA")
 
+        # ---------------------------------------------------
         # Final do treinamento do perceptron
         # ---------------------------------------------------
         print("\n==================================================")
@@ -126,12 +153,14 @@ def main():
 
         print(f"\nTotal de épocas utilizadas: {epoca}")
 
-
-        # Armazena o perceptron treinado
+        # ---------------------------------------------------
+        # Salva o perceptron treinado
+        # ---------------------------------------------------
         lista_perceptrons.append(perceptron)
 
-
-    # RESULTADO FINAL
+    # ===================================================
+    # RESULTADO FINAL GERAL
+    # ===================================================
     print("\n\n##################################################")
     print("RESULTADO FINAL DE TODOS OS PERCEPTRONS")
     print("##################################################")
