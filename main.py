@@ -1,6 +1,20 @@
 from Mlp import Mlp
 from LeituraArquivo import carregar_completo_npy, carregar_fausett
 import numpy as np
+import os
+from datetime import datetime
+from gerador_arquivos import (
+    salvar_hiperparametros, 
+    salvar_pesos_iniciais, 
+    salvar_pesos_finais, 
+    salvar_historico_erro, 
+    salvar_saidas_teste
+)
+ 
+# Configuração de pastas de saída
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+pasta_saida = f"resultados/{timestamp}"
+os.makedirs(pasta_saida, exist_ok=True)
 
 map_letras = {
     0: 'A',
@@ -41,45 +55,67 @@ X_val, T_val = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/spl
 # Carrega entradas e saídas de teste
 X_test, T_test = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/split/X_test.npy", "conjuntos de dados/CARACTERES COMPLETO/split/y_test.npy") 
 
+# Hiperparâmetros
+N_INPUTS  = 120
+N_HIDDEN  = 20
+N_OUTPUTS = 26
+ALPHA     = 0.1
+EPOCAS    = 5000
+ERRO_MIN  = 0.005
+PATIENCE  = 100
 
+np.random.seed(42)
+
+# Criação da rede
 rede = Mlp(
-    n_inputs=120,
-    n_hidden=120,
-    n_outputs=26,
-    alpha=0.01
+    n_inputs=N_INPUTS,
+    n_hidden=N_HIDDEN,
+    n_outputs=N_OUTPUTS,
+    alpha=ALPHA
 )
+
+# ARQUIVO 1 — Hiperparâmetros da arquitetura
+salvar_hiperparametros(
+    pasta_saida, N_INPUTS, N_HIDDEN, N_OUTPUTS, ALPHA, 
+    EPOCAS, ERRO_MIN, PATIENCE, rede.V.shape, rede.W.shape
+)
+
+# ARQUIVO 2 — Pesos iniciais (antes do treino)
+V_inicial = rede.V.copy()
+W_inicial = rede.W.copy()
+salvar_pesos_iniciais(pasta_saida, V_inicial, W_inicial, map_letras)
 
 # Treinamento
 historico, menor_erro_val = rede.train(
     X,
     T,
-    epocas=5000,
-    erro_minimo=0.005,
+    epocas=EPOCAS,
+    erro_minimo=ERRO_MIN,
     X_val=X_val,
     T_val=T_val,
-    patience=100
+    patience=PATIENCE
 )
 
-# -------------------------
-# Teste com todo o conjunto de teste
-# -------------------------
-acertos = 0
-total = len(X_test)
+# ARQUIVO 3 — Pesos finais (após o treino)
+salvar_pesos_finais(pasta_saida, rede.V, rede.W, historico, menor_erro_val, map_letras)
 
-for i in range(len(X_test)):
-    x = X_test[i]
-    t = T_test[i]
-    
-    y = rede.predict(x)
-    
-    if np.argmax(t) == np.argmax(y):
-        acertos += 1
+# ARQUIVO 4 — Histórico de erro por época
+salvar_historico_erro(pasta_saida, historico)
 
-acuracia = (acertos / total) * 100
+# ARQUIVO 5 — Saídas produzidas no conjunto de teste
+acertos, total, acuracia = salvar_saidas_teste(
+    pasta_saida, rede, X_test, T_test, map_letras, N_OUTPUTS
+)
 
+# Resultado final no console
 print("\n==============================")
 print("RESULTADO DO TESTE")
 print("==============================")
-
 print(f"\nAcertos: {acertos}/{total}")
 print(f"Acurácia: {acuracia:.2f}%")
+print(f"\nArquivos gerados em: {pasta_saida}/")
+print("  1. hiperparametros.txt")
+print("  2. pesos_iniciais.txt")
+print("  3. pesos_finais.txt")
+print("  4. historico_erro.csv")
+print("  5. saidas_teste.csv")
