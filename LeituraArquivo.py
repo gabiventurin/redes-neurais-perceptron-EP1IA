@@ -43,5 +43,7 @@ def carregar_completo_npy(caminho_x, caminho_y):
     # print(f"X: {X[0]} \n Y: {Y[0]}")
     return X, Y
 
-# X_Completo, Y_Completo = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/X.npy", "conjuntos de dados/CARACTERES COMPLETO/Y_classe.npy")
-# print("Completo -> X:", X_Completo.shape, "Y:", Y_Completo.shape)
+X_Completo, Y_Completo = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/X.npy", "conjuntos de dados/CARACTERES COMPLETO/Y_classe.npy")
+print("Completo -> X:", X_Completo.shape, "Y:", Y_Completo.shape)
+print("Completo -> X:", X_Completo[0])
+print("Completo -> Y:", Y_Completo[0])

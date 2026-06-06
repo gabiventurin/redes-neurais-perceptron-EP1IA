@@ -12,9 +12,9 @@ X, T = carregar_fausett(caminho_dataset)
 X_ruido, T_ruido = carregar_fausett(caminho_dataset_ruido)
 
 rede = Mlp(
-    n_inputs=63,
+    n_inputs=120,
     n_hidden=10,
-    n_outputs=7,
+    n_outputs=26,
     alpha=0.1
 )
 
@@ -22,14 +22,14 @@ rede = Mlp(
 historico = rede.train(
     X,
     T,
-    epocas=5000,
-    erro_minimo=0.005
+    epocas=500,
+    erro_minimo=0.05
 )
 
 # -------------------------
 # Teste de uma amostra
 # -------------------------
-indice_amostra = 1
+indice_amostra = 0
 
 
 x = X_ruido[indice_amostra]
