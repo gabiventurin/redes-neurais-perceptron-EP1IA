@@ -12,7 +12,7 @@ class Mlp:
         self.alpha = alpha
 
         # Matriz V
-        # Entrada e Camada
+        # Pesos e bias da Entrada e Camada
         # Dimensão: (n_hidden, n_inputs + 1)
         self.V = np.random.uniform(
             -0.5,
@@ -21,7 +21,7 @@ class Mlp:
         )
 
         # Matriz W
-        # Camada e Saida
+        # Pesos e bias da Camada e Saida
         # Dimensão: (n_outputs, n_hidden + 1) +1 é o bias
         self.W = np.random.uniform(
             -0.5,
@@ -79,7 +79,7 @@ class Mlp:
         VCorr = np.zeros_like(self.V)
 
         
-        ## BP PARTE 1: calcula os deltas (correções) para o vetor W ##
+        ## BP PARTE 1: calcula os deltas (correções ou termo de informação de erro) para o vetor W 
         delta_k = np.zeros(self.n_outputs)
         for k in range(self.n_outputs):
 
@@ -105,7 +105,7 @@ class Mlp:
 
             delta_in_j = 0
 
-            
+            #calculando o 'termo de informação' de cada neuronio escondido, ponderado pelos pesos referentes a eles
             for k in range(self.n_outputs):
 
                 delta_in_j += (
@@ -113,6 +113,7 @@ class Mlp:
                     * self.W[k, j + 1] # j+1 porque coluna 0 é bias
                 )
 
+            #calcula o delta do neurônio escondido j, multiplicando o termo de informação pelo valor da derivada da função de ativação naquele ponto
             delta_j = (
                 delta_in_j
                 * self.derivada_tanh(z_in[j])
@@ -150,6 +151,7 @@ class Mlp:
 
             for x, t in zip(X, T):
                 x_bias, z_in, z_bias, y_in, y = self.forward(x) ###FORWARD###
+
                 self.backpropagation(x_bias, z_in, z_bias, y_in, y, t) ###BACKPROPAGATION###
 
                 # Erro quadrático da amostra: 0.5 * sum((t - y)²)
@@ -166,3 +168,10 @@ class Mlp:
                 break
 
         return historico_erro
+    
+
+    def predict(self, x):
+
+        _, _, _, _, y = self.forward(x)
+
+        return y
