@@ -1,0 +1,11 @@
+
+============================================================
+Combinação 1/108
+n_hidden=10 | alpha=0.001 | patience=50 | epocas=500
+Época   100 | Erro médio: 1.816282 | Erro val: 1.945213 | Tempo: 65.60s
+Época   200 | Erro médio: 1.748487 | Erro val: 1.884699 | Tempo: 131.55s
+Época   300 | Erro médio: 1.641045 | Erro val: 1.781964 | Tempo: 199.30s
+Época   400 | Erro médio: 1.597302 | Erro val: 1.764769 | Tempo: 265.52s
+Early stopping na época 488 (sem melhora por 50 épocas) | Melhor erro val: 1.756297 | Tempo total: 324.54s
+Melhor erro de validação: 1.756297
+>>> NOVO MELHOR MODELO
