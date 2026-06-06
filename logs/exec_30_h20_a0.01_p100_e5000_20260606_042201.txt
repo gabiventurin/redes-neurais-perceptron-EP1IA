@@ -1,0 +1,10 @@
+
+============================================================
+Combinação 30/108
+n_hidden=20 | alpha=0.01 | patience=100 | epocas=5000
+Época   100 | Erro médio: 1.156337 | Erro val: 1.662690 | Tempo: 111.61s
+Época   200 | Erro médio: 0.847190 | Erro val: 1.535812 | Tempo: 223.02s
+Época   300 | Erro médio: 0.711377 | Erro val: 1.418097 | Tempo: 334.37s
+Época   400 | Erro médio: 0.604064 | Erro val: 1.434801 | Tempo: 445.76s
+Early stopping na época 400 (sem melhora por 100 épocas) | Melhor erro val: 1.418097 | Tempo total: 445.76s
+Melhor erro de validação: 1.418097

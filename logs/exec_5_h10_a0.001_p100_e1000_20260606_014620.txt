@@ -1,0 +1,16 @@
+
+============================================================
+Combinação 5/108
+n_hidden=10 | alpha=0.001 | patience=100 | epocas=1000
+Época   100 | Erro médio: 1.843367 | Erro val: 1.908285 | Tempo: 60.70s
+Época   200 | Erro médio: 1.763742 | Erro val: 1.833565 | Tempo: 123.54s
+Época   300 | Erro médio: 1.698113 | Erro val: 1.810869 | Tempo: 184.50s
+Época   400 | Erro médio: 1.607414 | Erro val: 1.719901 | Tempo: 245.37s
+Época   500 | Erro médio: 1.530776 | Erro val: 1.655738 | Tempo: 306.30s
+Época   600 | Erro médio: 1.472953 | Erro val: 1.631872 | Tempo: 367.05s
+Época   700 | Erro médio: 1.412231 | Erro val: 1.605152 | Tempo: 427.90s
+Época   800 | Erro médio: 1.371117 | Erro val: 1.583265 | Tempo: 488.68s
+Época   900 | Erro médio: 1.350713 | Erro val: 1.561374 | Tempo: 549.46s
+Época  1000 | Erro médio: 1.334520 | Erro val: 1.542473 | Tempo: 610.28s
+Melhor erro de validação: 1.542473
+>>> NOVO MELHOR MODELO

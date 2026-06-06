@@ -1,0 +1,15 @@
+
+============================================================
+Combinação 20/108
+n_hidden=20 | alpha=0.001 | patience=50 | epocas=1000
+Época   100 | Erro médio: 1.651946 | Erro val: 1.846321 | Tempo: 111.74s
+Época   200 | Erro médio: 1.414015 | Erro val: 1.722470 | Tempo: 223.34s
+Época   300 | Erro médio: 1.249344 | Erro val: 1.616521 | Tempo: 337.29s
+Época   400 | Erro médio: 1.138265 | Erro val: 1.537474 | Tempo: 449.43s
+Época   500 | Erro médio: 1.038718 | Erro val: 1.450292 | Tempo: 561.14s
+Época   600 | Erro médio: 0.954342 | Erro val: 1.374713 | Tempo: 672.97s
+Época   700 | Erro médio: 0.915643 | Erro val: 1.347905 | Tempo: 784.78s
+Época   800 | Erro médio: 0.897620 | Erro val: 1.332882 | Tempo: 896.47s
+Época   900 | Erro médio: 0.885360 | Erro val: 1.322965 | Tempo: 1008.11s
+Época  1000 | Erro médio: 0.874717 | Erro val: 1.305213 | Tempo: 1119.64s
+Melhor erro de validação: 1.305213

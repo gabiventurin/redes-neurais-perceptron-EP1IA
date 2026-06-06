@@ -1,0 +1,6 @@
+
+============================================================
+Combinação 76/108
+n_hidden=100 | alpha=0.001 | patience=100 | epocas=500
+Época   100 | Erro médio: 1.847123 | Erro val: 2.141674 | Tempo: 573.82s
+Época   200 | Erro médio: 1.722659 | Erro val: 2.080398 | Tempo: 1149.80s

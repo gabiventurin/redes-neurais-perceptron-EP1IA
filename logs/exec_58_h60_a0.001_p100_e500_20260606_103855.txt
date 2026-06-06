@@ -1,0 +1,10 @@
+
+============================================================
+Combinação 58/108
+n_hidden=60 | alpha=0.001 | patience=100 | epocas=500
+Época   100 | Erro médio: 1.577541 | Erro val: 1.909283 | Tempo: 313.08s
+Época   200 | Erro médio: 1.476681 | Erro val: 1.885648 | Tempo: 626.52s
+Época   300 | Erro médio: 1.426529 | Erro val: 1.835563 | Tempo: 939.91s
+Época   400 | Erro médio: 1.387129 | Erro val: 1.835337 | Tempo: 1253.25s
+Época   500 | Erro médio: 1.338791 | Erro val: 1.812167 | Tempo: 1568.32s
+Melhor erro de validação: 1.812167

@@ -1,0 +1,19 @@
+
+============================================================
+Combinação 39/108
+n_hidden=40 | alpha=0.001 | patience=50 | epocas=5000
+Época   100 | Erro médio: 1.774646 | Erro val: 1.978022 | Tempo: 212.53s
+Época   200 | Erro médio: 1.641386 | Erro val: 1.923063 | Tempo: 425.17s
+Época   300 | Erro médio: 1.522304 | Erro val: 1.841292 | Tempo: 637.76s
+Época   400 | Erro médio: 1.490514 | Erro val: 1.806749 | Tempo: 850.02s
+Época   500 | Erro médio: 1.475052 | Erro val: 1.787779 | Tempo: 1062.49s
+Época   600 | Erro médio: 1.466527 | Erro val: 1.781941 | Tempo: 1274.90s
+Época   700 | Erro médio: 1.452937 | Erro val: 1.773899 | Tempo: 1487.33s
+Época   800 | Erro médio: 1.444153 | Erro val: 1.763066 | Tempo: 1699.66s
+Época   900 | Erro médio: 1.437595 | Erro val: 1.743576 | Tempo: 1912.06s
+Época  1000 | Erro médio: 1.432419 | Erro val: 1.737146 | Tempo: 2124.75s
+Época  1100 | Erro médio: 1.429253 | Erro val: 1.726494 | Tempo: 2337.30s
+Época  1200 | Erro médio: 1.418928 | Erro val: 1.714572 | Tempo: 2549.73s
+Época  1300 | Erro médio: 1.388073 | Erro val: 1.680289 | Tempo: 2762.38s
+Early stopping na época 1380 (sem melhora por 50 épocas) | Melhor erro val: 1.676690 | Tempo total: 2932.52s
+Melhor erro de validação: 1.676690

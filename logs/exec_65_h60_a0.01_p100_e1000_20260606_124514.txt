@@ -1,0 +1,14 @@
+
+============================================================
+Combinação 65/108
+n_hidden=60 | alpha=0.01 | patience=100 | epocas=1000
+Época   100 | Erro médio: 1.371995 | Erro val: 1.764079 | Tempo: 313.90s
+Época   200 | Erro médio: 1.199549 | Erro val: 1.700744 | Tempo: 627.84s
+Época   300 | Erro médio: 1.056856 | Erro val: 1.564228 | Tempo: 941.90s
+Época   400 | Erro médio: 1.024452 | Erro val: 1.538936 | Tempo: 1256.04s
+Época   500 | Erro médio: 0.912216 | Erro val: 1.489074 | Tempo: 1570.33s
+Época   600 | Erro médio: 0.763884 | Erro val: 1.368495 | Tempo: 1884.42s
+Época   700 | Erro médio: 0.720275 | Erro val: 1.259684 | Tempo: 2198.73s
+Época   800 | Erro médio: 0.700952 | Erro val: 1.245467 | Tempo: 2512.69s
+Early stopping na época 888 (sem melhora por 100 épocas) | Melhor erro val: 1.241653 | Tempo total: 2789.76s
+Melhor erro de validação: 1.241653

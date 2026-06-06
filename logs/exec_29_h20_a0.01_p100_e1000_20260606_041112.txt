@@ -1,0 +1,11 @@
+
+============================================================
+Combinação 29/108
+n_hidden=20 | alpha=0.01 | patience=100 | epocas=1000
+Época   100 | Erro médio: 1.086904 | Erro val: 1.585082 | Tempo: 111.43s
+Época   200 | Erro médio: 0.885566 | Erro val: 1.477924 | Tempo: 223.08s
+Época   300 | Erro médio: 0.826515 | Erro val: 1.463046 | Tempo: 334.42s
+Época   400 | Erro médio: 0.687517 | Erro val: 1.407410 | Tempo: 445.96s
+Época   500 | Erro médio: 0.595967 | Erro val: 1.367856 | Tempo: 557.21s
+Early stopping na época 582 (sem melhora por 100 épocas) | Melhor erro val: 1.323975 | Tempo total: 648.64s
+Melhor erro de validação: 1.323975

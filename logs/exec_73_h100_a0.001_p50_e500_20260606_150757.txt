@@ -1,0 +1,8 @@
+
+============================================================
+Combinação 73/108
+n_hidden=100 | alpha=0.001 | patience=50 | epocas=500
+Época   100 | Erro médio: 1.806962 | Erro val: 2.213702 | Tempo: 573.07s
+Época   200 | Erro médio: 1.676389 | Erro val: 2.172587 | Tempo: 1150.90s
+Early stopping na época 217 (sem melhora por 50 épocas) | Melhor erro val: 2.162949 | Tempo total: 1248.32s
+Melhor erro de validação: 2.162949

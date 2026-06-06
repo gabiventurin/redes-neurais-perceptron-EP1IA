@@ -1,0 +1,8 @@
+
+============================================================
+Combinação 17/108
+n_hidden=10 | alpha=0.1 | patience=100 | epocas=1000
+Época   100 | Erro médio: 1.034459 | Erro val: 1.326154 | Tempo: 60.92s
+Early stopping na época 174 (sem melhora por 100 épocas) | Melhor erro val: 1.193681 | Tempo total: 105.99s
+Melhor erro de validação: 1.193681
+>>> NOVO MELHOR MODELO
