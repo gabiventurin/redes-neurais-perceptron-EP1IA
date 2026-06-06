@@ -4,16 +4,12 @@ import time
 class Mlp:
 
     def __init__(self, n_inputs, n_hidden, n_outputs, alpha):
-        # n_inputs: quantidade de entradas
-        # n_hidden: quantidade de neurônios escondidos
-        # n_outputs: quantidade de saídas
-        self.n_inputs = n_inputs
-        self.n_hidden = n_hidden
-        self.n_outputs = n_outputs
+        self.n_inputs = n_inputs # quantidade de entradas
+        self.n_hidden = n_hidden # quantidade de neurônios escondidos
+        self.n_outputs = n_outputs # quantidade de saídas
         self.alpha = alpha
 
-        # Matriz V
-        # Pesos e bias da Entrada e Camada
+        # Matriz V - pesos e bias da Entrada e Camada Oculta
         # Dimensão: (n_hidden, n_inputs + 1)
         self.V = np.random.uniform(
             -1,
@@ -21,8 +17,7 @@ class Mlp:
             (n_hidden, n_inputs + 1)
         )
 
-        # Matriz W
-        # Pesos e bias da Camada e Saida
+        # Matriz W - pesos e bias da Camada e Saida
         # Dimensão: (n_outputs, n_hidden + 1) +1 é o bias
         self.W = np.random.uniform(
             -1,
@@ -30,7 +25,7 @@ class Mlp:
             (n_outputs, n_hidden + 1)
         )
 
-    # Função de ativação
+    # Função de ativação - ANTIGA
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
@@ -38,11 +33,11 @@ class Mlp:
         s = self.sigmoid(x)
         return s * (1 - s)
 
+    # Função de ativação - NOVA
     # tanh retorna valores em (-1, 1), compatível com saídas bipolares
     def tanh(self, x):
         return np.tanh(x)
 
-    # MUDANÇA 3: derivada atualizada para tanh
     # derivada da tanh: 1 - tanh(x)²
     def derivada_tanh(self, x):
         return 1 - np.tanh(x) ** 2
