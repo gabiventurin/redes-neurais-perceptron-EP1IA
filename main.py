@@ -35,27 +35,33 @@ map_letras = {
 # Carrega entradas e saídas de treino
 X, T = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/split/X_train.npy", "conjuntos de dados/CARACTERES COMPLETO/split/y_train.npy")
 
+# Carrega entrada e saida de validação
+X_val, T_val = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/split/X_val.npy", "conjuntos de dados/CARACTERES COMPLETO/split/y_val.npy")
+
 # Carrega entradas e saídas de teste
 X_test, T_test = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/split/X_test.npy", "conjuntos de dados/CARACTERES COMPLETO/split/y_test.npy") 
 
 
 rede = Mlp(
     n_inputs=120,
-    n_hidden=10,
+    n_hidden=120,
     n_outputs=26,
-    alpha=0.1
+    alpha=0.01
 )
 
 # Treinamento
-historico = rede.train(
+historico, menor_erro_val = rede.train(
     X,
     T,
     epocas=5000,
-    erro_minimo=0.005
+    erro_minimo=0.005,
+    X_val=X_val,
+    T_val=T_val,
+    patience=100
 )
 
 # -------------------------
-# Teste com todo o conjunto de validação
+# Teste com todo o conjunto de teste
 # -------------------------
 acertos = 0
 total = len(X_test)

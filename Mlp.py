@@ -137,15 +137,56 @@ class Mlp:
         self.W += WCorr
         self.V += VCorr
 
-    # forward completo + backpropagation
-    def train(self, X, T, epocas=1000, erro_minimo=1e-4):
+    # # forward completo + backpropagation
+    # def train(self, X, T, epocas=1000, erro_minimo=1e-4):
+    #     """
+    #     X: matriz de entradas  (n_amostras, n_inputs)
+    #     T: matriz de saídas    (n_amostras, n_outputs)
+    #     epocas: número máximo de épocas
+    #     erro_minimo: critério de parada por erro quadrático médio
+    #     """
+    #     historico_erro = []
+
+    #     start_time = time.time()
+
+    #     for epoca in range(epocas):
+    #         erro_total = 0.0
+
+    #         for x, t in zip(X, T):
+    #             x_bias, z_in, z_bias, y_in, y = self.forward(x) ###FORWARD###
+
+    #             self.backpropagation(x_bias, z_in, z_bias, y_in, y, t) ###BACKPROPAGATION###
+
+    #             # Erro quadrático da amostra: 0.5 * sum((t - y)²)
+    #             erro_total += 0.5 * np.sum((t - y) ** 2)
+
+    #         erro_medio = erro_total / len(X)
+    #         historico_erro.append(erro_medio)
+
+    #         if (epoca + 1) % 100 == 0:
+    #             end_time = time.time()
+    #             print(f"Época {epoca + 1:5d} | Erro médio: {erro_medio:.6f} | Tempo: {end_time - start_time:.2f}s")
+
+    #         if erro_medio <= erro_minimo:
+    #             end_time = time.time()
+    #             print(f"Convergiu na época {epoca + 1} com erro {erro_medio:.6f}" f" | Tempo total: {end_time - start_time:.2f}s")
+    #             break
+
+    #     return historico_erro
+    
+    def train(self, X, T, epocas=1000, erro_minimo=1e-4, X_val=None, T_val=None, patience=10): 
         """
-        X: matriz de entradas  (n_amostras, n_inputs)
-        T: matriz de saídas    (n_amostras, n_outputs)
-        epocas: número máximo de épocas
-        erro_minimo: critério de parada por erro quadrático médio
+        X, T            : dados de treino
+        X_val, T_val    : dados de validação (optional)
+                          Se fornecidos, ativa early stopping.
+        patience        : épocas sem melhora no val antes de parar
         """
         historico_erro = []
+
+        usar_val = X_val is not None and T_val is not None
+        melhor_erro_val = np.inf
+        epocas_sem_melhora = 0
+        melhores_pesos = None
 
         start_time = time.time()
 
@@ -153,26 +194,58 @@ class Mlp:
             erro_total = 0.0
 
             for x, t in zip(X, T):
-                x_bias, z_in, z_bias, y_in, y = self.forward(x) ###FORWARD###
-
-                self.backpropagation(x_bias, z_in, z_bias, y_in, y, t) ###BACKPROPAGATION###
-
+                x_bias, z_in, z_bias, y_in, y = self.forward(x)
+                self.backpropagation(x_bias, z_in, z_bias, y_in, y, t)
                 # Erro quadrático da amostra: 0.5 * sum((t - y)²)
                 erro_total += 0.5 * np.sum((t - y) ** 2)
 
             erro_medio = erro_total / len(X)
             historico_erro.append(erro_medio)
 
+            # valiação no conjunto de validação
+            if usar_val:
+                erro_val = np.mean([
+                    0.5 * np.sum((t - self.predict(x)) ** 2)
+                    for x, t in zip(X_val, T_val)
+                ])
+
+                if erro_val < melhor_erro_val:
+                    melhor_erro_val = erro_val
+                    epocas_sem_melhora = 0
+                    melhores_pesos = (self.W.copy(),
+                                      self.V.copy())
+                else:
+                    epocas_sem_melhora += 1
+
+
             if (epoca + 1) % 100 == 0:
                 end_time = time.time()
-                print(f"Época {epoca + 1:5d} | Erro médio: {erro_medio:.6f} | Tempo: {end_time - start_time:.2f}s")
+                msg = f"Época {epoca + 1:5d} | Erro médio: {erro_medio:.6f}"
+                if usar_val:
+                    msg += f" | Erro val: {erro_val:.6f}" 
+                print(msg + f" | Tempo: {end_time - start_time:.2f}s")
 
             if erro_medio <= erro_minimo:
                 end_time = time.time()
-                print(f"Convergiu na época {epoca + 1} com erro {erro_medio:.6f}" f" | Tempo total: {end_time - start_time:.2f}s")
+                print(f"Convergiu na época {epoca + 1} com erro {erro_medio:.6f}"
+                      f" | Tempo total: {end_time - start_time:.2f}s")
                 break
 
-        return historico_erro
+            # critério de parada antecipada
+            if usar_val and epocas_sem_melhora >= patience:
+                end_time = time.time()
+                print(f"Early stopping na época {epoca + 1} "
+                      f"(sem melhora por {patience} épocas) "
+                      f"| Melhor erro val: {melhor_erro_val:.6f}"
+                      f" | Tempo total: {end_time - start_time:.2f}s")
+                self.W, self.V = melhores_pesos
+                break
+
+        # restaura melhores pesos caso tenha encerrado pelo erro_minimo ou epocas
+        if usar_val and melhores_pesos is not None:
+            self.W, self.V = melhores_pesos
+
+        return historico_erro, melhor_erro_val
     
 
     def predict(self, x):

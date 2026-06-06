@@ -1,236 +1,104 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-from sklearn.metrics import confusion_matrix
-
-from LeituraArquivo import carregar_fausett
 from Mlp import Mlp
+from LeituraArquivo import carregar_completo_npy
+from itertools import product
 
+#carrega os dados
+X, T = carregar_completo_npy(
+    "conjuntos de dados/CARACTERES COMPLETO/split/X_train.npy",
+    "conjuntos de dados/CARACTERES COMPLETO/split/y_train.npy"
+)
 
-def testar_rede(rede, X_teste, T_teste):
+X_val, T_val = carregar_completo_npy(
+    "conjuntos de dados/CARACTERES COMPLETO/split/X_val.npy",
+    "conjuntos de dados/CARACTERES COMPLETO/split/y_val.npy"
+)
 
-    total_acertos = 0
+X_test, T_test = carregar_completo_npy(
+    "conjuntos de dados/CARACTERES COMPLETO/split/X_test.npy",
+    "conjuntos de dados/CARACTERES COMPLETO/split/y_test.npy"
+)
 
-    classes_reais = []
-    classes_preditas = []
+#seta o hiperparâmetros para o grid search
+param_grid = {
+    "n_hidden": [10],
+    "alpha": [0.001],
+    "epocas" : [200, 300],
+    "patience": [50],
+}
 
-    for x, t in zip(X_teste, T_teste):
+melhor_erro = float("inf")
+melhor_rede = None
+melhores_parametros = None
 
-        y = rede.predict(x)
+combinacoes = list(product(
+    param_grid["n_hidden"],
+    param_grid["alpha"],
+    param_grid["patience"],
+    param_grid["epocas"]
+))
 
-        classe_predita = np.argmax(y)
-        classe_real = np.argmax(t)
+print(f"Total de combinações: {len(combinacoes)}")
 
-        classes_preditas.append(classe_predita)
-        classes_reais.append(classe_real)
+#treina com os hiperparâmetros
+for idx, (n_hidden, alpha, patience, epocas) in enumerate(combinacoes, start=1):
 
-        if classe_predita == classe_real:
-            total_acertos += 1
-
-    acuracia = total_acertos / len(X_teste)
-
-    return (
-        acuracia,
-        classes_reais,
-        classes_preditas
+    print("\n" + "=" * 60)
+    print(f"Combinação {idx}/{len(combinacoes)}")
+    print(
+        f"n_hidden={n_hidden} | "
+        f"alpha={alpha} | "
+        f"patience={patience} | "
+        f"epocas={epocas}"
     )
 
-
-def grid_search(
-    X_treino,
-    T_treino,
-    X_teste,
-    T_teste,
-    lista_alpha,
-    lista_erro_minimo,
-    n_hidden=10,
-    epocas=5000
-):
-
-    resultados = []
-
-    melhor_rede = None
-    melhor_historico = None
-
-    melhor_acuracia = -1
-
-    melhores_classes_reais = None
-    melhores_classes_preditas = None
-
-    for alpha in lista_alpha:
-
-        for erro_minimo in lista_erro_minimo:
-
-            print(
-                f"\nTreinando: "
-                f"alpha={alpha} "
-                f"erro_minimo={erro_minimo}"
-            )
-
-            rede = Mlp(
-                n_inputs=X_treino.shape[1],
-                n_hidden=n_hidden,
-                n_outputs=T_treino.shape[1],
-                alpha=alpha
-            )
-
-            historico = rede.train(
-                X_treino,
-                T_treino,
-                epocas=epocas,
-                erro_minimo=erro_minimo
-            )
-
-            (
-                acuracia,
-                classes_reais,
-                classes_preditas
-            ) = testar_rede(
-                rede,
-                X_teste,
-                T_teste
-            )
-
-            resultados.append(
-                {
-                    "alpha": alpha,
-                    "erro_minimo": erro_minimo,
-                    "epocas_executadas": len(historico),
-                    "erro_final": historico[-1],
-                    "acuracia": acuracia * 100
-                }
-            )
-
-            if acuracia > melhor_acuracia:
-
-                melhor_acuracia = acuracia
-
-                melhor_rede = rede
-                melhor_historico = historico
-
-                melhores_classes_reais = classes_reais
-                melhores_classes_preditas = classes_preditas
-
-    return (
-        pd.DataFrame(resultados),
-        melhor_rede,
-        melhor_historico,
-        melhores_classes_reais,
-        melhores_classes_preditas
+    rede = Mlp(
+        n_inputs=120,
+        n_hidden=n_hidden,
+        n_outputs=26,
+        alpha=alpha
     )
 
+    resultado = rede.train(
+        X,
+        T,
+        epocas=epocas,
+        erro_minimo=0.005,
+        X_val=X_val,
+        T_val=T_val,
+        patience=patience
+    )
 
-# ==================================================
-# CARREGAMENTO DOS DADOS
-# ==================================================
+    # pega o erro do modelo com os dados de validação dessa combinação
+    erro_val = resultado[1]
+    print(f"Melhor erro de validação: {erro_val:.6f}")
 
-X_treino, T_treino = carregar_fausett(
-    "./conjuntos de dados/caracteres-Fausett/caracteres-limpo.csv"
-)
+    if erro_val < melhor_erro:
+        melhor_erro = erro_val
+        melhor_rede = rede
 
-X_teste, T_teste = carregar_fausett(
-    "./conjuntos de dados/caracteres-Fausett/caracteres-ruido.csv"
-)
+        melhores_parametros = {
+            "n_hidden": n_hidden,
+            "alpha": alpha,
+            "patience": patience,
+            "epocas": epocas
+        }
 
-# ==================================================
-# GRID SEARCH
-# ==================================================
+        print(">>> NOVO MELHOR MODELO")
 
-(
-    tabela_resultados,
-    melhor_rede,
-    melhor_historico,
-    classes_reais,
-    classes_preditas
-) = grid_search(
-    X_treino,
-    T_treino,
-    X_teste,
-    T_teste,
-    lista_alpha=[0.001, 0.05, 0.1, 0.2],
-    lista_erro_minimo=[0.05],
-    n_hidden=10,
-    epocas=500
-)
+#calcula a acurácia do melhor modelo no conjunto de teste
+acertos = 0
+for x, t in zip(X_test, T_test):
+    y = melhor_rede.predict(x)
 
-# ==================================================
-# TABELA DE RESULTADOS
-# ==================================================
+    if y.argmax() == t.argmax():
+        acertos += 1
 
-print("\nRESULTADOS:")
-print(tabela_resultados)
+acuracia = 100 * acertos / len(X_test)
 
-# # ==================================================
-# # GRÁFICO 1
-# # ERRO MÉDIO X ÉPOCA
-# # ==================================================
+print("MELHOR CONFIGURAÇÃO")
+print(f"Erro de validação: {melhor_erro:.6f}")
+print(f"Parâmetros: {melhores_parametros}")
 
-# plt.figure(figsize=(10, 5))
-
-# plt.plot(melhor_historico)
-
-# plt.title("Erro Médio x Época")
-# plt.xlabel("Época")
-# plt.ylabel("Erro Médio")
-
-# plt.grid(True)
-
-# plt.savefig("erro_vs_epoca.png")
-# plt.show()
-
-# # ==================================================
-# # GRÁFICO 2
-# # ALPHA X ACURÁCIA
-# # ==================================================
-
-# plt.figure(figsize=(10, 5))
-
-# plt.plot(
-#     tabela_resultados["alpha"],
-#     tabela_resultados["acuracia"],
-#     marker="o"
-# )
-
-# plt.title("Alpha x Acurácia")
-# plt.xlabel("Alpha")
-# plt.ylabel("Acurácia (%)")
-
-# plt.grid(True)
-
-# plt.savefig("alpha_vs_acuracia.png")
-# plt.show()
-
-# # ==================================================
-# # GRÁFICO 3
-# # MATRIZ DE CONFUSÃO
-# # ==================================================
-
-# matriz = confusion_matrix(
-#     classes_reais,
-#     classes_preditas
-# )
-
-# plt.figure(figsize=(8, 8))
-
-# plt.imshow(matriz)
-
-# plt.colorbar()
-
-# plt.title("Matriz de Confusão")
-
-# plt.xlabel("Classe Predita")
-# plt.ylabel("Classe Real")
-
-# for i in range(matriz.shape[0]):
-#     for j in range(matriz.shape[1]):
-#         plt.text(
-#             j,
-#             i,
-#             matriz[i, j],
-#             ha="center",
-#             va="center"
-#         )
-
-# plt.savefig("matriz_confusao.png")
-# plt.show()
+print("RESULTADO NO TESTE")
+print(f"Acertos: {acertos}/{len(X_test)}")
+print(f"Acurácia: {acuracia:.2f}%")
