@@ -151,7 +151,7 @@ X_teste, T_teste = carregar_fausett(
     lista_alpha=[0.001, 0.05, 0.1, 0.2],
     lista_erro_minimo=[0.05],
     n_hidden=10,
-    epocas=5000
+    epocas=500
 )
 
 # ==================================================
@@ -161,76 +161,76 @@ X_teste, T_teste = carregar_fausett(
 print("\nRESULTADOS:")
 print(tabela_resultados)
 
-# ==================================================
-# GRÁFICO 1
-# ERRO MÉDIO X ÉPOCA
-# ==================================================
+# # ==================================================
+# # GRÁFICO 1
+# # ERRO MÉDIO X ÉPOCA
+# # ==================================================
 
-plt.figure(figsize=(10, 5))
+# plt.figure(figsize=(10, 5))
 
-plt.plot(melhor_historico)
+# plt.plot(melhor_historico)
 
-plt.title("Erro Médio x Época")
-plt.xlabel("Época")
-plt.ylabel("Erro Médio")
+# plt.title("Erro Médio x Época")
+# plt.xlabel("Época")
+# plt.ylabel("Erro Médio")
 
-plt.grid(True)
+# plt.grid(True)
 
-plt.savefig("erro_vs_epoca.png")
-plt.show()
+# plt.savefig("erro_vs_epoca.png")
+# plt.show()
 
-# ==================================================
-# GRÁFICO 2
-# ALPHA X ACURÁCIA
-# ==================================================
+# # ==================================================
+# # GRÁFICO 2
+# # ALPHA X ACURÁCIA
+# # ==================================================
 
-plt.figure(figsize=(10, 5))
+# plt.figure(figsize=(10, 5))
 
-plt.plot(
-    tabela_resultados["alpha"],
-    tabela_resultados["acuracia"],
-    marker="o"
-)
+# plt.plot(
+#     tabela_resultados["alpha"],
+#     tabela_resultados["acuracia"],
+#     marker="o"
+# )
 
-plt.title("Alpha x Acurácia")
-plt.xlabel("Alpha")
-plt.ylabel("Acurácia (%)")
+# plt.title("Alpha x Acurácia")
+# plt.xlabel("Alpha")
+# plt.ylabel("Acurácia (%)")
 
-plt.grid(True)
+# plt.grid(True)
 
-plt.savefig("alpha_vs_acuracia.png")
-plt.show()
+# plt.savefig("alpha_vs_acuracia.png")
+# plt.show()
 
-# ==================================================
-# GRÁFICO 3
-# MATRIZ DE CONFUSÃO
-# ==================================================
+# # ==================================================
+# # GRÁFICO 3
+# # MATRIZ DE CONFUSÃO
+# # ==================================================
 
-matriz = confusion_matrix(
-    classes_reais,
-    classes_preditas
-)
+# matriz = confusion_matrix(
+#     classes_reais,
+#     classes_preditas
+# )
 
-plt.figure(figsize=(8, 8))
+# plt.figure(figsize=(8, 8))
 
-plt.imshow(matriz)
+# plt.imshow(matriz)
 
-plt.colorbar()
+# plt.colorbar()
 
-plt.title("Matriz de Confusão")
+# plt.title("Matriz de Confusão")
 
-plt.xlabel("Classe Predita")
-plt.ylabel("Classe Real")
+# plt.xlabel("Classe Predita")
+# plt.ylabel("Classe Real")
 
-for i in range(matriz.shape[0]):
-    for j in range(matriz.shape[1]):
-        plt.text(
-            j,
-            i,
-            matriz[i, j],
-            ha="center",
-            va="center"
-        )
+# for i in range(matriz.shape[0]):
+#     for j in range(matriz.shape[1]):
+#         plt.text(
+#             j,
+#             i,
+#             matriz[i, j],
+#             ha="center",
+#             va="center"
+#         )
 
-plt.savefig("matriz_confusao.png")
-plt.show()
+# plt.savefig("matriz_confusao.png")
+# plt.show()

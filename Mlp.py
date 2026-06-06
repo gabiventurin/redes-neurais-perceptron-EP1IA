@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 class Mlp:
 
@@ -15,8 +16,8 @@ class Mlp:
         # Pesos e bias da Entrada e Camada
         # Dimensão: (n_hidden, n_inputs + 1)
         self.V = np.random.uniform(
-            -0.5,
-            0.5,
+            -1,
+            1,
             (n_hidden, n_inputs + 1)
         )
 
@@ -24,8 +25,8 @@ class Mlp:
         # Pesos e bias da Camada e Saida
         # Dimensão: (n_outputs, n_hidden + 1) +1 é o bias
         self.W = np.random.uniform(
-            -0.5,
-            0.5,
+            -1,
+            1,
             (n_outputs, n_hidden + 1)
         )
 
@@ -146,6 +147,8 @@ class Mlp:
         """
         historico_erro = []
 
+        start_time = time.time()
+
         for epoca in range(epocas):
             erro_total = 0.0
 
@@ -161,10 +164,12 @@ class Mlp:
             historico_erro.append(erro_medio)
 
             if (epoca + 1) % 100 == 0:
-                print(f"Época {epoca + 1:5d} | Erro médio: {erro_medio:.6f}")
+                end_time = time.time()
+                print(f"Época {epoca + 1:5d} | Erro médio: {erro_medio:.6f} | Tempo: {end_time - start_time:.2f}s")
 
             if erro_medio <= erro_minimo:
-                print(f"Convergiu na época {epoca + 1} com erro {erro_medio:.6f}")
+                end_time = time.time()
+                print(f"Convergiu na época {epoca + 1} com erro {erro_medio:.6f}" f" | Tempo total: {end_time - start_time:.2f}s")
                 break
 
         return historico_erro
