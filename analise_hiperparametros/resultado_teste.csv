@@ -1,0 +1,3 @@
+n_hidden,alpha,patience,epocas_maximas,epocas_executadas,early_stopping,tempo_execucao_segundos,erro_validacao,erro_treinamento_final,acuracia_teste
+20,0.1,100,100,100,False,122.48990353100817,1.5260019322182852,1.455559242026746,31.65829145728643
+10,0.1,100,100,100,False,68.40658139099833,1.6786063692068252,1.5840119536670652,21.608040201005025
