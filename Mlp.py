@@ -131,43 +131,6 @@ class Mlp:
         ## BP PARTE 3: atualiza os pesos ##
         self.W += WCorr
         self.V += VCorr
-
-    # # forward completo + backpropagation
-    # def train(self, X, T, epocas=1000, erro_minimo=1e-4):
-    #     """
-    #     X: matriz de entradas  (n_amostras, n_inputs)
-    #     T: matriz de saídas    (n_amostras, n_outputs)
-    #     epocas: número máximo de épocas
-    #     erro_minimo: critério de parada por erro quadrático médio
-    #     """
-    #     historico_erro = []
-
-    #     start_time = time.time()
-
-    #     for epoca in range(epocas):
-    #         erro_total = 0.0
-
-    #         for x, t in zip(X, T):
-    #             x_bias, z_in, z_bias, y_in, y = self.forward(x) ###FORWARD###
-
-    #             self.backpropagation(x_bias, z_in, z_bias, y_in, y, t) ###BACKPROPAGATION###
-
-    #             # Erro quadrático da amostra: 0.5 * sum((t - y)²)
-    #             erro_total += 0.5 * np.sum((t - y) ** 2)
-
-    #         erro_medio = erro_total / len(X)
-    #         historico_erro.append(erro_medio)
-
-    #         if (epoca + 1) % 100 == 0:
-    #             end_time = time.time()
-    #             print(f"Época {epoca + 1:5d} | Erro médio: {erro_medio:.6f} | Tempo: {end_time - start_time:.2f}s")
-
-    #         if erro_medio <= erro_minimo:
-    #             end_time = time.time()
-    #             print(f"Convergiu na época {epoca + 1} com erro {erro_medio:.6f}" f" | Tempo total: {end_time - start_time:.2f}s")
-    #             break
-
-    #     return historico_erro
     
     def train(self, X, T, epocas=1000, erro_minimo=1e-4, X_val=None, T_val=None, patience=10): 
         """

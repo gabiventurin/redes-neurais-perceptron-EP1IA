@@ -1,0 +1,13 @@
+
+============================================================
+Combinação 23/36
+n_hidden=20 | alpha=0.1 | patience=100 | epocas=1000
+Época   100 | Erro médio: 1.056314 | Erro val: 1.342615 | Tempo: 108.37s
+Época   200 | Erro médio: 0.731251 | Erro val: 1.093218 | Tempo: 216.31s
+Época   300 | Erro médio: 0.598827 | Erro val: 0.983041 | Tempo: 324.36s
+Época   400 | Erro médio: 0.642972 | Erro val: 1.132773 | Tempo: 432.44s
+Época   500 | Erro médio: 0.452596 | Erro val: 0.948878 | Tempo: 540.46s
+Época   600 | Erro médio: 0.454865 | Erro val: 0.918565 | Tempo: 648.42s
+Early stopping na época 649 (sem melhora por 100 épocas) | Melhor erro val: 0.892531 | Tempo total: 701.97s
+Melhor erro de validação: 0.892531
+>>> NOVO MELHOR MODELO

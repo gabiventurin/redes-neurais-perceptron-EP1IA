@@ -1,0 +1,8 @@
+
+============================================================
+Combinação 2/36
+n_hidden=15 | alpha=0.001 | patience=50 | epocas=5000
+Época   100 | Erro médio: 1.796242 | Erro val: 1.935475 | Tempo: 102.35s
+Época   200 | Erro médio: 1.704241 | Erro val: 1.923660 | Tempo: 213.83s
+Early stopping na época 205 (sem melhora por 50 épocas) | Melhor erro val: 1.921937 | Tempo total: 219.02s
+Melhor erro de validação: 1.921937

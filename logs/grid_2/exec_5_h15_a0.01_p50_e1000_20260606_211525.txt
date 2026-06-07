@@ -1,0 +1,8 @@
+
+============================================================
+Combinação 5/36
+n_hidden=15 | alpha=0.01 | patience=50 | epocas=1000
+Época   100 | Erro médio: 1.321327 | Erro val: 1.701297 | Tempo: 93.83s
+Época   200 | Erro médio: 1.167325 | Erro val: 1.623089 | Tempo: 186.16s
+Early stopping na época 253 (sem melhora por 50 épocas) | Melhor erro val: 1.598021 | Tempo total: 235.34s
+Melhor erro de validação: 1.598021

@@ -1,0 +1,25 @@
+
+============================================================
+Combinação 28/36
+n_hidden=25 | alpha=0.001 | patience=100 | epocas=5000
+Época   100 | Erro médio: 1.788490 | Erro val: 1.976324 | Tempo: 133.52s
+Época   200 | Erro médio: 1.693740 | Erro val: 1.956908 | Tempo: 267.05s
+Época   300 | Erro médio: 1.557938 | Erro val: 1.862412 | Tempo: 400.58s
+Época   400 | Erro médio: 1.502892 | Erro val: 1.820864 | Tempo: 533.98s
+Época   500 | Erro médio: 1.393646 | Erro val: 1.768494 | Tempo: 667.42s
+Época   600 | Erro médio: 1.325043 | Erro val: 1.714433 | Tempo: 801.11s
+Época   700 | Erro médio: 1.253441 | Erro val: 1.700103 | Tempo: 934.52s
+Época   800 | Erro médio: 1.167358 | Erro val: 1.661057 | Tempo: 1067.82s
+Época   900 | Erro médio: 1.113562 | Erro val: 1.590336 | Tempo: 1201.25s
+Época  1000 | Erro médio: 1.088473 | Erro val: 1.549611 | Tempo: 1334.56s
+Época  1100 | Erro médio: 1.071029 | Erro val: 1.537541 | Tempo: 1468.07s
+Época  1200 | Erro médio: 1.065729 | Erro val: 1.532656 | Tempo: 1601.50s
+Época  1300 | Erro médio: 1.060307 | Erro val: 1.530789 | Tempo: 1734.88s
+Época  1400 | Erro médio: 1.050443 | Erro val: 1.529666 | Tempo: 1868.23s
+Época  1500 | Erro médio: 1.042336 | Erro val: 1.525792 | Tempo: 2001.89s
+Época  1600 | Erro médio: 1.036793 | Erro val: 1.514341 | Tempo: 2135.38s
+Época  1700 | Erro médio: 1.035045 | Erro val: 1.508546 | Tempo: 2268.97s
+Época  1800 | Erro médio: 1.032837 | Erro val: 1.501074 | Tempo: 2402.38s
+Época  1900 | Erro médio: 1.030710 | Erro val: 1.500771 | Tempo: 2535.77s
+Early stopping na época 1969 (sem melhora por 100 épocas) | Melhor erro val: 1.500303 | Tempo total: 2627.96s
+Melhor erro de validação: 1.500303

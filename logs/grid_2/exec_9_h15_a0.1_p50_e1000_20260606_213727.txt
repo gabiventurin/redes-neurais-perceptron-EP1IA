@@ -1,0 +1,9 @@
+
+============================================================
+Combinação 9/36
+n_hidden=15 | alpha=0.1 | patience=50 | epocas=1000
+Época   100 | Erro médio: 0.955505 | Erro val: 1.258443 | Tempo: 107.54s
+Época   200 | Erro médio: 0.672334 | Erro val: 1.162801 | Tempo: 213.21s
+Early stopping na época 231 (sem melhora por 50 épocas) | Melhor erro val: 1.054040 | Tempo total: 244.84s
+Melhor erro de validação: 1.054040
+>>> NOVO MELHOR MODELO

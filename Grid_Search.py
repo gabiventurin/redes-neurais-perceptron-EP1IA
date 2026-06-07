@@ -4,7 +4,9 @@ from itertools import product
 import os
 import sys
 from datetime import datetime
+import numpy as np
 os.makedirs("logs", exist_ok=True)
+np.random.seed(42)
 
 #carrega os dados
 X, T = carregar_completo_npy(
@@ -24,9 +26,9 @@ X_test, T_test = carregar_completo_npy(
 
 #seta o hiperparâmetros para o grid search
 param_grid = {
-    "n_hidden": [10, 20, 40, 60, 100, 120],
+    "n_hidden": [15, 20, 25],
     "alpha": [0.001, 0.01, 0.1],
-    "epocas" : [500, 1000, 5000],
+    "epocas" : [1000, 5000],
     "patience": [50, 100],
 }
 

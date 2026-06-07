@@ -1,0 +1,22 @@
+
+============================================================
+Combinação 4/36
+n_hidden=15 | alpha=0.001 | patience=100 | epocas=5000
+Época   100 | Erro médio: 1.721819 | Erro val: 1.913350 | Tempo: 100.78s
+Época   200 | Erro médio: 1.481359 | Erro val: 1.725943 | Tempo: 196.93s
+Época   300 | Erro médio: 1.306719 | Erro val: 1.595328 | Tempo: 294.52s
+Época   400 | Erro médio: 1.157112 | Erro val: 1.532170 | Tempo: 391.28s
+Época   500 | Erro médio: 1.013662 | Erro val: 1.465155 | Tempo: 494.22s
+Época   600 | Erro médio: 0.934781 | Erro val: 1.431497 | Tempo: 589.44s
+Época   700 | Erro médio: 0.859004 | Erro val: 1.429876 | Tempo: 683.26s
+Época   800 | Erro médio: 0.789326 | Erro val: 1.403585 | Tempo: 776.93s
+Época   900 | Erro médio: 0.753899 | Erro val: 1.383144 | Tempo: 870.40s
+Época  1000 | Erro médio: 0.728061 | Erro val: 1.374120 | Tempo: 963.73s
+Época  1100 | Erro médio: 0.704342 | Erro val: 1.357178 | Tempo: 1055.66s
+Época  1200 | Erro médio: 0.689395 | Erro val: 1.347669 | Tempo: 1147.32s
+Época  1300 | Erro médio: 0.681774 | Erro val: 1.342644 | Tempo: 1239.99s
+Época  1400 | Erro médio: 0.673984 | Erro val: 1.342855 | Tempo: 1332.96s
+Época  1500 | Erro médio: 0.662203 | Erro val: 1.346270 | Tempo: 1426.33s
+Early stopping na época 1567 (sem melhora por 100 épocas) | Melhor erro val: 1.340541 | Tempo total: 1489.20s
+Melhor erro de validação: 1.340541
+>>> NOVO MELHOR MODELO
