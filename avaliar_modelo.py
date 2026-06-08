@@ -6,7 +6,6 @@ import os
 from sklearn.metrics import confusion_matrix
 from Mlp import Mlp
 
-
 # 1. Configurações de Caminho
 pasta_raiz = r'C:\repositorio_IA\redes-neurais-perceptron-EP1IA'
 pasta_split = f'{pasta_raiz}/conjuntos de dados/CARACTERES COMPLETO/split'
