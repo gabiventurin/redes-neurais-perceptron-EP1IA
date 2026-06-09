@@ -84,6 +84,16 @@ def salvar_historico_erro(pasta_saida, historico):
     print(f"[OK] Histórico de erro salvo em: {caminho_erro}")
 
 
+def salvar_historico_erros_validacao(pasta_saida, historico_validacao):
+    """Gera um arquivo CSV com o histórico de erros de validação por época"""
+    caminho_erro_val = os.path.join(pasta_saida, "historico_erros_validacao.csv")
+    with open(caminho_erro_val, "w", encoding="utf-8") as f:
+        f.write("epoca,erro_validacao\n")
+        for epoca, erro in enumerate(historico_validacao, start=1):
+            f.write(f"{epoca},{erro:.8f}\n")
+    print(f"[OK] Histórico de erros de validação salvo em: {caminho_erro_val}")
+
+
 def salvar_saidas_teste(pasta_saida, rede, X_test, T_test, map_letras, n_outputs):
     """Gera o arquivo 5: Saídas produzidas no conjunto de teste e retorna as métricas"""
     acertos = 0
