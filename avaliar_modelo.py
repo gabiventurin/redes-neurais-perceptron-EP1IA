@@ -12,7 +12,7 @@ from Mlp import Mlp
 # Caminhos
 pasta_raiz = r"C:\repositorio_IA\redes-neurais-perceptron-EP1IA"
 pasta_split = f"{pasta_raiz}/conjuntos de dados/CARACTERES COMPLETO/split"
-arquivo_pesos = f"{pasta_raiz}/resultados/20260609_082139/pesos_finais.txt"
+arquivo_pesos = f"{pasta_raiz}/resultados/20260606_233417/pesos_finais.txt"
 
 
 def carregar_npy(caminho):
@@ -168,14 +168,19 @@ print("\nMatriz de Confusão gerada.")
 
 plt.figure(figsize=(15, 12))
 
+letras = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
 sns.heatmap(
     cm,
     annot=True,
     fmt="d",
     cmap="Blues",
     square=True,
-    linewidths=0.5
+    linewidths=0.5,
+    xticklabels=letras,
+    yticklabels=letras
 )
+plt.gca().invert_yaxis()
 
 plt.title(
     f"Matriz de Confusão - Acurácia {acuracia:.2%}"
