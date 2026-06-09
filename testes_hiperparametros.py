@@ -77,7 +77,7 @@ for idx, (n_hidden, alpha, patience, epocas) in enumerate(combinacoes, start=1):
         alpha=alpha
     )
 
-    historico_erro, menor_erro_val = rede.train(
+    historico_erro, menor_erro_val, _ = rede.train(
         X_train,
         T_train,
         epocas=epocas,
