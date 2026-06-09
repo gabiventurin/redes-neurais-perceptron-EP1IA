@@ -1,0 +1,23 @@
+===== HIPERPARÂMETROS DA REDE NEURAL MLP =====
+
+[Arquitetura]
+  n_inputs  = 120
+  n_hidden  = 20
+  n_outputs = 26
+
+[Treinamento]
+  alpha (taxa de aprendizado) = 0.1
+  epocas (máximo)             = 1000
+  erro_minimo                 = 0.005
+  patience (early stopping)   = 100
+
+[Função de ativação]
+  Camada escondida : tanh
+  Camada de saída  : tanh
+
+[Inicialização dos pesos]
+  Distribuição uniforme no intervalo [-1, 1]
+
+[Dimensões das matrizes de peso]
+  V (entrada → escondida) : (20, 121)  (n_hidden x (n_inputs + 1))
+  W (escondida → saída)   : (26, 21)  (n_outputs x (n_hidden + 1))

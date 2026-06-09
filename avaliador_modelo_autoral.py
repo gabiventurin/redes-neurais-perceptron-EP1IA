@@ -13,7 +13,7 @@ from Mlp import Mlp
 pasta_raiz = r'C:\repositorio_IA\redes-neurais-perceptron-EP1IA'
 pasta_caracteres = f'{pasta_raiz}/conjuntos de dados/CARACTERES COMPLETO'
 pasta_split = f'{pasta_raiz}/conjuntos de dados/CARACTERES COMPLETO/split'
-arquivo_pesos = f'{pasta_raiz}/resultados/20260609_082139/pesos_finais.txt'
+arquivo_pesos = f'{pasta_raiz}/resultados/20260606_201308/pesos_finais.txt'
 
 # 2. Carregar arquivos
 
@@ -300,14 +300,19 @@ plt.figure(
     figsize=(15, 12)
 )
 
+letras = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
 sns.heatmap(
     cm,
     annot=True,
-    fmt='d',
-    cmap='Blues',
+    fmt="d",
+    cmap="Blues",
     square=True,
-    linewidths=0.5
+    linewidths=0.5,
+    xticklabels=letras,
+    yticklabels=letras
 )
+plt.gca().invert_yaxis()
 
 plt.title(
     f'Matriz de Confusão - '
