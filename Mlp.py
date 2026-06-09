@@ -140,6 +140,7 @@ class Mlp:
         patience        : épocas sem melhora no val antes de parar
         """
         historico_erro = []
+        historico_erro_val = []
 
         usar_val = X_val is not None and T_val is not None
         melhor_erro_val = np.inf
@@ -166,6 +167,7 @@ class Mlp:
                     0.5 * np.sum((t - self.predict(x)) ** 2)
                     for x, t in zip(X_val, T_val)
                 ])
+                historico_erro_val.append(erro_val)
 
                 if erro_val < melhor_erro_val:
                     melhor_erro_val = erro_val
@@ -203,7 +205,7 @@ class Mlp:
         if usar_val and melhores_pesos is not None:
             self.W, self.V = melhores_pesos
 
-        return historico_erro, melhor_erro_val
+        return historico_erro, melhor_erro_val, historico_erro_val
     
 
     def predict(self, x):

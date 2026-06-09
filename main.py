@@ -8,6 +8,7 @@ from gerador_arquivos import (
     salvar_pesos_iniciais, 
     salvar_pesos_finais, 
     salvar_historico_erro, 
+    salvar_historico_erros_validacao,
     salvar_saidas_teste
 )
  
@@ -86,7 +87,7 @@ W_inicial = rede.W.copy()
 salvar_pesos_iniciais(pasta_saida, V_inicial, W_inicial, map_letras)
 
 # Treinamento
-historico, menor_erro_val = rede.train(
+historico, menor_erro_val, historico_validacao = rede.train(
     X,
     T,
     epocas=EPOCAS,
@@ -102,7 +103,10 @@ salvar_pesos_finais(pasta_saida, rede.V, rede.W, historico, menor_erro_val, map_
 # ARQUIVO 4 — Histórico de erro por época
 salvar_historico_erro(pasta_saida, historico)
 
-# ARQUIVO 5 — Saídas produzidas no conjunto de teste
+# ARQUIVO 5 — Histórico de erros de validação por época
+salvar_historico_erros_validacao(pasta_saida, historico_validacao)
+
+# ARQUIVO 6 — Saídas produzidas no conjunto de teste
 acertos, total, acuracia = salvar_saidas_teste(
     pasta_saida, rede, X_test, T_test, map_letras, N_OUTPUTS
 )
@@ -118,4 +122,5 @@ print("  1. hiperparametros.txt")
 print("  2. pesos_iniciais.txt")
 print("  3. pesos_finais.txt")
 print("  4. historico_erro.csv")
-print("  5. saidas_teste.csv")
+print("  5. historico_erros_validacao.csv")
+print("  6. saidas_teste.csv")
