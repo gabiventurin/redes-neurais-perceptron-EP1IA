@@ -55,12 +55,14 @@ X_val, T_val = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/spl
 # Carrega entradas e saídas de teste
 X_test, T_test = carregar_completo_npy("conjuntos de dados/CARACTERES COMPLETO/split/X_test.npy", "conjuntos de dados/CARACTERES COMPLETO/split/y_test.npy") 
 
+n_hidden=20 | alpha=0.1 | patience=100 | epocas=5000
+
 # Hiperparâmetros
 N_INPUTS  = 120
 N_HIDDEN  = 20
 N_OUTPUTS = 26
 ALPHA     = 0.1
-EPOCAS    = 1000
+EPOCAS    = 5000
 ERRO_MIN  = 0.005
 PATIENCE  = 100
 
