@@ -33,7 +33,7 @@ class Mlp:
         s = self.sigmoid(x)
         return s * (1 - s)
 
-    # Função de ativação - NOVA
+    # Função de ativação 
     # tanh retorna valores em (-1, 1), compatível com saídas bipolares
     def tanh(self, x):
         return np.tanh(x)
@@ -68,6 +68,7 @@ class Mlp:
         y = self.tanh(y_in)
 
         return x_bias, z_in, z_bias, y_in, y
+
 
     def backpropagation(self, x_bias, z_in, z_bias, y_in, y, saidas_esperadas):
         # matrizes de correção
@@ -155,13 +156,14 @@ class Mlp:
             for x, t in zip(X, T):
                 x_bias, z_in, z_bias, y_in, y = self.forward(x)
                 self.backpropagation(x_bias, z_in, z_bias, y_in, y, t)
+
                 # Erro quadrático da amostra: 0.5 * sum((t - y)²)
                 erro_total += 0.5 * np.sum((t - y) ** 2)
 
             erro_medio = erro_total / len(X)
             historico_erro.append(erro_medio)
 
-            # valiação no conjunto de validação
+            # avaliação no conjunto de validação
             if usar_val:
                 erro_val = np.mean([
                     0.5 * np.sum((t - self.predict(x)) ** 2)

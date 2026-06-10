@@ -26,9 +26,9 @@ X_test, T_test = carregar_completo_npy(
 
 #seta o hiperparâmetros para o grid search
 param_grid = {
-    "n_hidden": [15, 20, 25],
+    "n_hidden": [10, 15, 20, 25, 40, 50, 60, 100],
     "alpha": [0.001, 0.01, 0.1],
-    "epocas" : [1000, 5000],
+    "epocas" : [500, 1000, 5000],
     "patience": [50, 100],
 }
 

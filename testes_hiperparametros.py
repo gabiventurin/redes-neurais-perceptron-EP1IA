@@ -34,8 +34,8 @@ X_test, T_test = carregar_completo_npy(
 # HIPERPARÂMETROS (setar os parametros que nao vao variar com os melhores valores #definidos pelo grid:
 # alpha: 0,1 ; epocas: 5000 ; patience: 100; n_hidden: 20
 param_grid = {
-    "n_hidden": [20],
-    "alpha": [ 0.001, 0.005, 0.01, 0.05, 0.1, 0.2],
+    "n_hidden": [50],
+    "alpha": [0.1,],
     "epocas": [5000],
     "patience": [100]
 }
